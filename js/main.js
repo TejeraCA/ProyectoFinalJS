@@ -1,31 +1,4 @@
-const viajes = [
-    {
-        id: 1,
-        nombre: "Hielo Azul",
-        precio: 50000,
-        img: "https://www.welcomeargentina.com/paseos/hieloazul/refugio-hielo-azul-el-bolson-2.jpg",
 
-
-    },
-    {
-        id: 2,
-        nombre: "Cajon Del Azul",
-        precio: 45000,
-        img: "https://www.rionegro.com.ar/wp-content/uploads/2023/01/El-Bolson-Cajon-del-Azul-Federico-Magri-11-2.jpg"
-    },
-    {
-        id: 3,
-        nombre: "El Retamal",
-        precio: 32000,
-        img: "https://elbolsonguia.com.ar/wp-content/uploads/2023/07/Refugio-El-Retamal-1_11zon-1-scaled.jpeg"
-    },
-    {
-        id: 4,
-        nombre: "Los Laguitos",
-        precio: 50000,
-        img: "https://www.rionegro.com.ar/wp-content/uploads/2021/11/bolson-refugio-la-playita.jpg"
-    },
-];
 
 let tour;
 
@@ -38,7 +11,53 @@ if (localStorage.getItem("tour")) {
 
 const container = document.getElementById("container");
 
+fetch ('./data.json')
+.then (response => response.json())
+.then (data => data.forEach(el => crearCard(el)));
 
+const mostrar = document.createElement("button");
+mostrar.innerText = "Ver mi tour";
+
+
+mostrar.addEventListener("click", () => {
+    console.log("Este es el tour a realizar", tour);
+});
+
+const limpiar = document.createElement("button");
+limpiar.innerText = "Volver a organizar mi tour";
+
+limpiar.addEventListener("click", () => {
+    if (tour.length > 0){
+    Swal.fire({
+        title: 'Está seguro de borrar el tour?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, seguro',
+        cancelButtonText: 'No, no quiero'
+    })
+        .then(result => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Qué pena!",
+                    text: "Borraste el Tour",
+                    icon: "error",
+                });
+                tour = [];
+                localStorage.setItem("tour", JSON.stringify(tour));
+                } else {
+                    Swal.fire({
+                        title: "Bien ahí!",
+                        text: "No eliminaste nada",
+                        icon: "success",
+                    });
+            };
+        });
+    } else {
+        Toastify({
+            text: "El carrito está vacío. No lo podés limpiar",
+        }).showToast();
+    }
+})
 
 function agregarAlCarrito(refugio) {
 
@@ -113,52 +132,6 @@ Formulario.addEventListener("submit", (e) => {
 
 const boton = document.createElement("button");
 boton.innerText = "Agregar a mi Tour"
-
-viajes.forEach(el => crearCard(el));
-
-const mostrar = document.createElement("button");
-mostrar.innerText = "Ver mi tour";
-
-
-mostrar.addEventListener("click", () => {
-    console.log("Este es el tour a realizar", tour);
-});
-
-const limpiar = document.createElement("button");
-limpiar.innerText = "Volver a organizar mi tour";
-
-limpiar.addEventListener("click", () => {
-    if (tour.length > 0){
-    Swal.fire({
-        title: 'Está seguro de borrar el tour?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, seguro',
-        cancelButtonText: 'No, no quiero'
-    })
-        .then(result => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Qué pena!",
-                    text: "Borraste el Tour",
-                    icon: "error",
-                });
-                tour = [];
-                localStorage.setItem("tour", JSON.stringify(tour));
-                } else {
-                    Swal.fire({
-                        title: "Bien ahí!",
-                        text: "No eliminaste nada",
-                        icon: "success",
-                    });
-            };
-        });
-    } else {
-        Toastify({
-            text: "El carrito está vacío. No lo podés limpiar",
-        }).showToast();
-    }
-});
 
 carrito.append(mostrar)
 carrito.append(limpiar)

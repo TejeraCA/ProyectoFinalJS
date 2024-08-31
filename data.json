@@ -1,0 +1,28 @@
+ [
+    {
+        "id": 1,
+        "nombre": "Hielo Azul",
+        "precio": 50000,
+        "img": "https://www.welcomeargentina.com/paseos/hieloazul/refugio-hielo-azul-el-bolson-2.jpg"
+
+
+    },
+    {
+        "id": 2,
+        "nombre": "Cajon Del Azul",
+        "precio": 45000,
+        "img": "https://www.rionegro.com.ar/wp-content/uploads/2023/01/El-Bolson-Cajon-del-Azul-Federico-Magri-11-2.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "El Retamal",
+        "precio": 32000,
+        "img": "https://elbolsonguia.com.ar/wp-content/uploads/2023/07/Refugio-El-Retamal-1_11zon-1-scaled.jpeg"
+    },
+    {
+        "id": 4,
+        "nombre": "Los Laguitos",
+        "precio": 50000,
+        "img": "https://www.rionegro.com.ar/wp-content/uploads/2021/11/bolson-refugio-la-playita.jpg"
+    }
+]
